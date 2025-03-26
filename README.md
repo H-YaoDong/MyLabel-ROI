@@ -2,7 +2,7 @@
 
 绘制矩形，椭圆，直线实际用的都是是同一个思路：鼠标第一次点击就确定了本次绘制的矩形（椭圆，直线）的位置，然后拖动鼠标生成矩形（椭圆，直线），最后释放鼠标，矩形（椭圆，直线）就绘制完成了。而多边形不同，绘制多边形是一种离散的操作，多边形是由多个离散的点组成，靠的是鼠标点击绘制，而不是拖动绘制，因此文章只介绍矩形的多边形的绘制方法。
 
-![](./images/1.gif)
+![](https://github.com/H-YaoDong/MyLabel-ROI/raw/main/images/1.gif)
 
 ## 绘制一个矩形（椭圆）roi
 
@@ -30,13 +30,13 @@ void MyLabel::mousePressEvent(QMouseEvent *event){
 
 这样，就能绘制一个矩形（椭圆）roi了。绘制直线的过程也符合上述逻辑：首先，设置鼠标点击的位置为线的第一个点；然后，在鼠标移动的过程中，不断地更新线的第二个点；最后，再调用update方法更新即可。
 
-![](images\4.gif)
+![](https://github.com/H-YaoDong/MyLabel-ROI/raw/main/images/4.gif)
 
 ## 绘制一个多边形roi
 
 绘制多边形roi的思路与上述的矩形，椭圆，直线就不一样。由于多边形是离散的多个点，我们就需要使用一个容器来存储这些点。实际上，在QT实现的QPolygon类中，也是用一个QList链表来存储这些节点。
 
-![](images\1.png)
+![](https://github.com/H-YaoDong/MyLabel-ROI/raw/main/images/1.png)
 
 绘制多边形roi的思路是：用链表记录鼠标每次点击的位置（mousePressEvent）---->绘制多边形的中的点和线段（paintEvent），注意在绘制完之前，多边形roi不是闭合的。
 
@@ -59,7 +59,7 @@ void MyLabel::mousePressEvent(QMouseEvent *event){
 }
 ```
 
-![](images\2.gif)
+![](https://github.com/H-YaoDong/MyLabel-ROI/raw/main/images/2.gif)
 
 ## 对矩形roi的缩放：
 
@@ -68,7 +68,7 @@ void MyLabel::mousePressEvent(QMouseEvent *event){
 1. 距离矩形roi顶点周围CORPADDING像素大小
 2. 在矩形的边内外EDGPADDING像素大小
 
-![](images\5.png)
+![](https://github.com/H-YaoDong/MyLabel-ROI/raw/main/images/5.png)
 
 由于拖动不同的边和不同的顶点，矩形的缩放行为也不一样（往左拖动左边，矩形就应该向左放大；往右拖动左边，矩形就应该向右缩小）。为了清楚当前是拖动矩形roi的那条边，那个顶点，就需要引入方向枚举变量。
 
@@ -200,7 +200,7 @@ void scaleRect(QRectF rect, QPoint mousePoint){
 
 如果鼠标在多边形点周围CORPADDING像素范围的大小，那么鼠标就可以拖动该顶点，以修改多边形的形状和大小
 
-![](images\3.png)
+![](https://github.com/H-YaoDong/MyLabel-ROI/raw/main/images/3.png)
 
 当找到了拖动的那个点后，再进行拖动，就能缩放多边形roi了。
 
